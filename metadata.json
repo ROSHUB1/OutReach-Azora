@@ -1,0 +1,6 @@
+{
+  "name": "Outreach Studio",
+  "description": "Automated outreach platform with 5-slot Gmail OAuth live dispatch, round-robin rotation, 2-day cadence sequences, and AI lead qualification.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
