@@ -34,13 +34,15 @@ export const clearAccountToken = (accountId: string) => {
 export async function connectGmailAccount(slotIndex: number): Promise<OAuthGmailAccount> {
   const accountId = `account-${slotIndex + 1}`;
 
+  const clientId = (import.meta as any).env?.VITE_GOOGLE_CLIENT_ID || firebaseConfig.oAuthClientId;
+
   // Method 1: Google Identity Services (GSI) Token Client (Standard Google OAuth 2.0)
-  if (typeof window !== 'undefined' && (window as any).google?.accounts?.oauth2 && firebaseConfig.oAuthClientId) {
+  if (typeof window !== 'undefined' && (window as any).google?.accounts?.oauth2 && clientId) {
     try {
       const token = await new Promise<string>((resolve, reject) => {
         try {
           const tokenClient = (window as any).google.accounts.oauth2.initTokenClient({
-            client_id: firebaseConfig.oAuthClientId,
+            client_id: clientId,
             scope: GMAIL_SCOPES.join(' '),
             prompt: 'select_account consent',
             callback: (tokenResponse: any) => {
